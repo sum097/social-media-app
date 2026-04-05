@@ -1,7 +1,16 @@
+"use client"
+
 import React from 'react'
+import SignUpModal from './modals/SignUpModal'
+import LogInModal from './modals/LogInModal'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 
 export default function SignUpPrompt() {
+  const username = useSelector((state: RootState) => state.user.username)
+
   return (
+    !username &&
     <div className='fixed w-full h-[80px] bg-[#F4AF01] 
     bottom-0 flex justify-center items-center md:space-x-5
     lg:justify-between lg:px-20 xl:px-40 2xl:px-80
@@ -13,17 +22,8 @@ export default function SignUpPrompt() {
       </div>
 
       <div className='flex space-x-2 w-full md:w-fit p-3'>
-        <button 
-        className='w-full h-[48px] md:w-[88px] md:h-[40px] text-md md:text-sm border-2 border-gray-100
-        rounded-full text-white font-bold hover:bg-white hover:bg-opacity-25
-        transition
-        '
-        >Login</button>
-        <button
-        className="w-full h-[48px] md:w-[88px] md:h-[40px] text-md md:text-sm font-bold bg-white
-        rounded-full
-        "
-        >Sign Up</button>
+        <LogInModal/>
+        <SignUpModal />
       </div>
       
     </div>

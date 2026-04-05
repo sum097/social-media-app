@@ -12,7 +12,7 @@ import Post from "./Post";
 export default function Postinput() {
   return (
     <>
-    <div className="flex space-x-5 p-3">
+    <div className="flex space-x-5 p-3 border-b border-gray-100">
       <Image
         src="/assets/busybee-logo2.png"
         width={44}
@@ -28,7 +28,7 @@ export default function Postinput() {
           placeholder="What's happening!?"
         />
 
-        <div className="flex justify-between pt-5">
+        <div className="flex justify-between pt-5 border-t border-gray-100">
           <div className="flex space-x-1.5">
             <PhotoIcon className="w-[22px] h-[22px] text-[#F4AF01]" />
             <ChartBarIcon className="w-[22px] h-[22px] text-[#F4AF01]" />

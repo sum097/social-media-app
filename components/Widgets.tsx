@@ -9,7 +9,7 @@ export default function Widgets() {
   return (
     <div
       className="p-3 hidden lg:flex flex-col space-y-4
-    w-[400px]
+    w-[400px] ps-10
     "
     >
       <div
