@@ -18,7 +18,6 @@ export default function Sidebar() {
     xl:mr-10
     ">
       <div className="relative h-full flex flex-col
-      items-center
       ">
         <div className="py-3">
           <Image

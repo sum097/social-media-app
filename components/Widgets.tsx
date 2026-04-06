@@ -44,7 +44,7 @@ export default function Widgets() {
           text-[#536471]
           "
           >
-            <span>Trending in Australia</span>
+            <span>Trending in Canada</span>
             <EllipsisHorizontalIcon className="w-[20px]" />
           </div>
 
@@ -68,7 +68,7 @@ export default function Widgets() {
           text-[#536471]
           "
           >
-            <span>Trending in Australia</span>
+            <span>Trending in USA</span>
             <EllipsisHorizontalIcon className="w-[20px]" />
           </div>
 
@@ -77,13 +77,13 @@ export default function Widgets() {
           text-sm
           "
           >
-            #ReactJS
+            #Inflation
           </span>
           <span
             className="text-[#536471] text-xs
           "
           >
-            240K Bumbles
+            110K Bumbles
           </span>
         </div>
         <div className="flex flex-col py-3 space-y-0.5">
@@ -92,7 +92,7 @@ export default function Widgets() {
           text-[#536471]
           "
           >
-            <span>Trending in Australia</span>
+            <span>Trending in UK</span>
             <EllipsisHorizontalIcon className="w-[20px]" />
           </div>
 
@@ -101,13 +101,13 @@ export default function Widgets() {
           text-sm
           "
           >
-            #ReactJS
+            #Brexit
           </span>
           <span
             className="text-[#536471] text-xs
           "
           >
-            240K Bumbles
+            380K Bumbles
           </span>
         </div>
         <div className="flex flex-col py-3 space-y-0.5">
@@ -116,7 +116,7 @@ export default function Widgets() {
           text-[#536471]
           "
           >
-            <span>Trending in Australia</span>
+            <span>Trending in Canada</span>
             <EllipsisHorizontalIcon className="w-[20px]" />
           </div>
 
@@ -125,13 +125,13 @@ export default function Widgets() {
           text-sm
           "
           >
-            #ReactJS
+            #LoanRelief
           </span>
           <span
             className="text-[#536471] text-xs
           "
           >
-            240K Bumbles
+            205K Bumbles
           </span>
         </div>
       </div>
@@ -151,7 +151,7 @@ export default function Widgets() {
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-3">
             <Image
-              src={"/assets/iman.jpg"}
+              src={"/assets/elon.jpg"}
               width={56}
               height={56}
               alt="Profile Picture of Iman Musa"
@@ -159,8 +159,8 @@ export default function Widgets() {
             />
 
             <div className="flex flex-col text-sm">
-              <span className="font-bold">Iman Musa</span>
-              <span>@imancodes</span>
+              <span className="font-bold">Elon Musk</span>
+              <span>@elonmusk</span>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ export default function Widgets() {
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-3">
             <Image
-              src={"/assets/iman.jpg"}
+              src={"/assets/ceo.jpg"}
               width={56}
               height={56}
               alt="Profile Picture of Iman Musa"
@@ -180,8 +180,8 @@ export default function Widgets() {
             />
 
             <div className="flex flex-col text-sm">
-              <span className="font-bold">Iman Musa</span>
-              <span>@imancodes</span>
+              <span className="font-bold">Sundar Pichai</span>
+              <span>@sundarpichai</span>
             </div>
           </div>
 
@@ -193,7 +193,7 @@ export default function Widgets() {
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-3">
             <Image
-              src={"/assets/iman.jpg"}
+              src={"/assets/ceo-micro.jpg"}
               width={56}
               height={56}
               alt="Profile Picture of Iman Musa"
@@ -201,8 +201,8 @@ export default function Widgets() {
             />
 
             <div className="flex flex-col text-sm">
-              <span className="font-bold">Iman Musa</span>
-              <span>@imancodes</span>
+              <span className="font-bold">Satya Nadella</span>
+              <span>@satyanadella</span>
             </div>
           </div>
 

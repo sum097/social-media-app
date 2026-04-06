@@ -6,44 +6,71 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { closeSignUpModal, openSignUpModal } from "@/redux/slices/modalSlice";
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "@/firebase";
 import { signInUser } from "@/redux/slices/userSlice";
 
-
 export default function SignUpModal() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const isOpen = useSelector(
     (state: RootState) => state.modals.signUpModalOpen,
   );
   const dispatch: AppDispatch = useDispatch();
 
+  async function handleGuestLogIn() {
+    await signInWithEmailAndPassword(
+      auth,
+      "guest12345000@gmail.com",
+      "12345678",
+    );
+  }
+
   async function handleSignup() {
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
       email,
       password,
-    )
+    );
+
+    await updateProfile(userCredentials.user, {
+      displayName: name,
+    });
+
+    dispatch(
+      signInUser({
+        name: userCredentials.user.displayName,
+        username: userCredentials.user.email!.split("@")[0],
+        email: userCredentials.user.email,
+        uid: userCredentials.user.uid,
+      }),
+    );
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) return
+      if (!currentUser) return;
 
       // Handle Redux Actions
-      dispatch(signInUser(
-        {
-          name: "",
+      dispatch(
+        signInUser({
+          name: currentUser.displayName,
           username: currentUser.email!.split("@")[0],
           email: currentUser.email,
-          uid: currentUser.uid
-      }))
-    })  
-    return unsubscribe
-  }, [])
+          uid: currentUser.uid,
+        }),
+      );
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <>
@@ -63,11 +90,12 @@ export default function SignUpModal() {
       >
         <div
           className="w-full h-full sm:w-[600px] sm:h-fit bg-white
-        sm:rounded-xl 
+        sm:rounded-xl outline-none
         "
         >
-          <XMarkIcon className="w-7 mt-5 ms-5 cursor-pointer"
-          onClick={() => dispatch(closeSignUpModal())}
+          <XMarkIcon
+            className="w-7 mt-5 ms-5 cursor-pointer"
+            onClick={() => dispatch(closeSignUpModal())}
           />
           <div className="pt-10 pb-20 px-4 sm:px-20">
             <h1 className="text-3xl font-bold mb-10">Create your account</h1>
@@ -78,6 +106,8 @@ export default function SignUpModal() {
               "
                 placeholder="Name"
                 type="text"
+                onChange={(event) => setName(event.target.value)}
+                value={name}
               />
               <input
                 className="w-full h-[54px] border border-gray-200 
@@ -102,28 +132,30 @@ export default function SignUpModal() {
                   onChange={(event) => setPassword(event.target.value)}
                   value={password}
                 />
-                <div 
-                onClick={() => setShowPassword(!showPassword)}
-                className="w-7 h-7 text-gray-400 cursor-pointer">
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="w-7 h-7 text-gray-400 cursor-pointer"
+                >
                   {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
                 </div>
               </div>
             </div>
             <button
-            className="bg-[#F4AF01] text-white h-[48px]
+              className="bg-[#F4AF01] text-white h-[48px]
             rounded-full shadow-md mb-5 w-full
             "
-            onClick={() => handleSignup()}
+              onClick={() => handleSignup()}
             >
               Sign Up
             </button>
             <span className="mb-5 text-sm text-center block">Or</span>
             <button
-            className="bg-[#F4AF01] text-white h-[48px]
+              className="bg-[#F4AF01] text-white h-[48px]
             rounded-full shadow-md mb-5 w-full
             "
+            onClick={() => handleGuestLogIn()}
             >
-              Log In
+              Log In as Guest
             </button>
           </div>
         </div>
