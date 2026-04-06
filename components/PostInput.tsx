@@ -101,7 +101,6 @@ export default function Postinput({ insideModal }: PostInputProps) {
         </div>
       </div>
     </div>
-    <Post />
     </>
   );
 }
