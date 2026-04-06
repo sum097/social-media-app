@@ -14,30 +14,31 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { getDoc, doc } from "firebase/firestore"
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase";
 
 const fetchPost = async (id: string) => {
-    const postRef = doc(db, "posts", id)
-    const postSnap = await getDoc(postRef)
-    return postSnap.data()
-}
+  const postRef = doc(db, "posts", id);
+  const postSnap = await getDoc(postRef);
+  return postSnap.data();
+};
 
 interface PageProps {
-    params: {
-        id: string
-    }
+  params: Promise<{
+    id: string;
+  }>;
 }
 
 interface Comment {
-                name: string;
-                text: string;
-                username: string
-            }
+  name: string;
+  text: string;
+  username: string;
+}
 
-export default async function page({ params }: PageProps) {
-    const { id }= params
-    const post = await fetchPost(id)
+export default async function page(props: PageProps) {
+  const params = await props.params;
+  const { id } = params;
+  const post = await fetchPost(id);
 
   return (
     <>
@@ -136,11 +137,14 @@ export default async function page({ params }: PageProps) {
             />
           </div>
 
-          {
-            post?.comments.map((comment: Comment) => (
-            <Comment name={comment.name} username={comment.username} 
-            text={comment.text} 
-            />))}
+          {post?.comments.map((comment: Comment, index: number) => (
+            <Comment
+              key={`${comment.username}-${index}`}
+              name={comment.name}
+              username={comment.username}
+              text={comment.text}
+            />
+          ))}
         </div>
         <Widgets />
       </div>
@@ -151,12 +155,12 @@ export default async function page({ params }: PageProps) {
 }
 
 interface CommentProps {
-    name: string;
-    username: string;
-    text: string;
+  name: string;
+  username: string;
+  text: string;
 }
 
-function Comment({ name, username, text}: CommentProps) {
+function Comment({ name, username, text }: CommentProps) {
   return (
     <div className="border-b border-gray-100">
       <PostHeader name={name} username={username} text={text} />

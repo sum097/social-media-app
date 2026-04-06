@@ -25,7 +25,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 
 interface PostProps {
@@ -38,8 +37,8 @@ export default function Post({ data, id }: PostProps) {
   const user = useSelector((state: RootState) => state.user);
 
   async function likePost() {
-    if(!user.username){
-      dispatch(openLogInModal())
+    if (!user.username) {
+      dispatch(openLogInModal());
       return;
     }
 
@@ -76,9 +75,8 @@ export default function Post({ data, id }: PostProps) {
             hover:text-[#F4AF01] transition
             "
             onClick={() => {
-
-              if(!user.username){
-                dispatch(openLogInModal())
+              if (!user.username) {
+                dispatch(openLogInModal());
                 return;
               }
 
@@ -93,12 +91,11 @@ export default function Post({ data, id }: PostProps) {
               dispatch(openCommentModal());
             }}
           />
-          {
-            data.comments.length > 0 &&
+          {data.comments.length > 0 && (
             <span className="absolute text-xs top-1 -right-3">
               {data.comments.length}
             </span>
-          }
+          )}
         </div>
         <div className="relative">
           {data.likes.includes(user.uid) ? (
@@ -116,10 +113,11 @@ export default function Post({ data, id }: PostProps) {
               onClick={() => likePost()}
             />
           )}
-          {
-            data.likes.length > 0 &&
-          <span className="absolute text-xs top-1 -right-3">{data.likes.length}</span>
-          }
+          {data.likes.length > 0 && (
+            <span className="absolute text-xs top-1 -right-3">
+              {data.likes.length}
+            </span>
+          )}
         </div>
         <div className="relative">
           <ChartBarIcon
@@ -138,6 +136,17 @@ export default function Post({ data, id }: PostProps) {
       </div>
     </div>
   );
+}
+
+function formatTimeAgo(date: Date): string {
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+  if (seconds < 60) return `${seconds}s`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h`;
+  const days = Math.floor(hours / 24);
+  return `${days}d`;
 }
 
 interface PostHeaderProps {
@@ -187,7 +196,7 @@ export function PostHeader({
           {timestamp && (
             <>
               <span>•</span>
-              <Moment fromNow>{timestamp.toDate()}</Moment>
+              <span>{formatTimeAgo(timestamp.toDate())}</span>
             </>
           )}
         </div>
